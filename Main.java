@@ -7,9 +7,13 @@
 import java.util.Random;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 class Main {
     
@@ -140,7 +144,7 @@ class Main {
             fw = new FileWriter(fn);
             bw = new BufferedWriter(fw);
 
-            bw.write("COORDENADAS\n");
+            //bw.write("COORDENADAS\n");
 
             for (Imagem i : v) {
                 bw.write(i.getCoord() + "\n");
@@ -165,11 +169,57 @@ class Main {
             }
         }
     }
-/*
-    public Imagem[] leArquivo(String fn) {
-        Imagem[] v;
-        return v;
-    }*/
+
+    public List<String> leArquivo(String fn) {
+        BufferedReader br = null;
+        FileReader fr = null;
+        List<String> s = new ArrayList<>();
+
+        try {
+            fr = new FileReader(fn);
+            br = new BufferedReader(fr);
+        
+            String linha;
+
+            while((linha = br.readLine()) != null) {
+                s.add(linha);
+            }
+        }
+
+        catch (IOException ex) {
+            ex.printStackTrace();
+            mostraFrase(17);
+        }
+
+        finally {
+            try {
+                if (br != null)
+                    br.close();
+
+                if (fr != null)
+                    fr.close();
+            } 
+            catch (IOException ex) {
+                ex.printStackTrace();
+                mostraFrase(17);
+            }
+
+        }
+        return s;
+    }
+
+    public void montaVetor(String fn) {
+
+        List<String> s = leArquivo(fn);
+
+        v = new Imagem[s.size()];
+            int i = 0;
+            for (String aux : s) {
+                //System.out.println(aux);
+                v[i++] = new Imagem(aux);
+                //System.out.println(v[i-1]);
+            }
+    }
 
     public void opcao1() {
         int num = 0;
@@ -213,8 +263,8 @@ class Main {
         scan.nextLine();
         String fn = scan.nextLine(); 
 
-        //Confere se existe e le
-        //v = leArquivo(fn);
+        //Confere se existe, le e monta o vetor
+        montaVetor(fn);
 
         //Faz sort
 
