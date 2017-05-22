@@ -213,16 +213,16 @@ public class Gerador {
         return v;
     }
 
-    public Imagem[] geraVetorDeCoord(int tipo, int n) {
+    public Imagem[] geraVetorDeCoord(char tipo, int n) {
         switch(tipo) {
-            case 1:
-                return geraVetorInvertido(n);
-            case 2:
-                return geraVetorSemiOrdenado(n);
-            case 3:
-                return geraVetorRepetido(n);
-            default:
+            case '1':
                 return geraVetorAleatorio(n);
+            case '2':
+                return geraVetorInvertido(n);
+            case '3':
+                return geraVetorSemiOrdenado(n);
+            default:
+                return geraVetorRepetido(n);
         }
     }
 
