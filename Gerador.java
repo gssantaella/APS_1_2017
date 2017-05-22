@@ -50,7 +50,7 @@ public class Gerador {
     // Construtores
     Gerador() {}
 
-    Gerador(int tamanho, int tipo) {
+    /*Gerador(int tamanho, int tipo) {
         this.tamanho = tamanho;
         this.tipo = tipo;
     }
@@ -67,7 +67,7 @@ public class Gerador {
     }
     public int getTipo() {
         return this.tipo;
-    }
+    }*/
 
 /*
     public static void main(String[] args) {
@@ -189,7 +189,7 @@ public class Gerador {
         for (int i = 0; i < n/5; i++) { //20% dos valores estao embaralhados
             int j = r.nextInt(n);
             int k = r.nextInt(n);
-            System.out.println(j +" "+ k);
+            //System.out.println(j +" "+ k);
             aux.setCoord(v[j].getCoord());
             v[j].setCoord(v[k].getCoord());
             v[k].setCoord(aux.getCoord());
@@ -213,16 +213,16 @@ public class Gerador {
         return v;
     }
 
-    public Imagem[] geraVetorDeCoord(int tipo, int n) {
+    public Imagem[] geraVetorDeCoord(char tipo, int n) {
         switch(tipo) {
-            case 1:
-                return geraVetorInvertido(n);
-            case 2:
-                return geraVetorSemiOrdenado(n);
-            case 3:
-                return geraVetorRepetido(n);
-            default:
+            case '1':
                 return geraVetorAleatorio(n);
+            case '2':
+                return geraVetorInvertido(n);
+            case '3':
+                return geraVetorSemiOrdenado(n);
+            default:
+                return geraVetorRepetido(n);
         }
     }
 

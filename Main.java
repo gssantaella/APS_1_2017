@@ -1,0 +1,260 @@
+/*
+ *
+ * Classe de interacao com o usuario
+ *
+ */
+
+import java.util.Random;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.Arrays;
+
+class Main {
+    
+    // criar vetor com as escolhas possiveis
+    // fica mais facil de ver se a opcao existe
+    private char[] opcao = {'1', '2', '3', '4', '5'};
+    private String[] frases = {
+        "\n\n--- Ordenar Imagens de Satelite ---\n",
+        "\n\t1) Gerar arquivo de imagens",
+        "\n\t2) Ler arquivo e ordenar",
+        "\n\t3) Gerar imagens internamente e ordenar",
+        "\n\t4) Testes automaticos",
+        "\n\t5) Sair do programa",
+        "\nEscolha: ",
+        "\n!!! Opcao invalida !!!",
+        "\nQuantidade de imagens a serem criadas: ",
+        "\nTipo de vetor a ser criado: ",
+        "\n\t1) Aleatorio",
+        "\n\t2) Invertido",
+        "\n\t3) Semi ordenado",
+        "\n\t4) Repetido",
+        "\n\t5) Voltar para menu inicial",
+        "\nNome do arquivo: ",
+        "\nArquivo criado",
+        "\n!!! Arquivo nao existe !!!",
+        "\nDigite o nome do arquivo ou 'Q' para voltar ao menu inicial",
+        "\nArquivo encontrado",
+        "\nRealizando ordenacao",
+        "\nHeapsort",
+        "\nMergesort",
+        "\nQuicksort",
+        "\n--- Fim ---\n",
+        "\nSalvar arquivo\n",
+    };
+    private Scanner scan = new Scanner(System.in);
+    private Gerador g = new Gerador();
+    //private Ordenador o = new Ordenador();
+    private Imagem[] v;
+    
+
+    // MAIN
+    public static void main(String[] args) {
+
+        Main m = new Main();     
+
+        for (boolean sair = false; sair != true; ) {
+            char c = '0';
+
+            while (!m.existeEm(m.opcao, c)) {
+                m.geraMenu(0,6);
+                c = m.validaEntrada(c);
+            }
+
+            switch(c) {
+                case '1':
+                    m.opcao1();
+                    break;
+                case '2':
+                    m.opcao2();
+                    break;
+                case '3':
+                    m.opcao3();
+                    break;
+                case '4':
+                    m.opcao4();
+                    break;
+                case '5':
+                    sair = true;
+                    m.mostraFrase(24);
+                    break;
+                default:
+                    break;
+            }
+
+        }
+
+    } //fim main
+
+
+    // METODOS
+
+    public void mostraFrase(int i) {
+        System.out.print(frases[i]);
+    }
+    public void geraMenu(int j, int k) {
+        for (int i = j; i <= k; i++)
+            mostraFrase(i);
+    }
+
+
+    //TODO - unificar ou separar ambos valida entrada
+    public char validaEntrada(char c) {
+        //char c = '0';
+        try {
+            c = scan.next("[1-5sSnNqQ]").charAt(0);
+        } catch (Exception e) {
+            mostraFrase(7);
+            scan.nextLine();
+        }
+        //System.out.println("> "+c);
+        return c;
+    }
+    public int validaEntrada(int c) {
+        //int c = 0;
+        try {
+            c = scan.nextInt();
+        } catch (Exception e) {
+            mostraFrase(7);
+            scan.nextLine();
+        }
+        //System.out.println("> "+c);
+        return c;
+    }
+
+    public boolean existeEm(char[] v, char c) {
+        for (char i : v) {
+            if (i == c)
+                return true;
+        }
+        return false;
+    }
+
+    public void escreveArquivo(String fn, Imagem[] v) {
+        BufferedWriter bw = null;
+        FileWriter fw = null;
+
+        try {
+            fw = new FileWriter(fn);
+            bw = new BufferedWriter(fw);
+
+            bw.write("COORDENADAS\n");
+
+            for (Imagem i : v) {
+                bw.write(i.getCoord() + "\n");
+            }
+
+            mostraFrase(16);
+        } 
+        catch (IOException e) {
+            e.printStackTrace();
+            mostraFrase(17);
+        } 
+        finally {
+            try {
+                if (bw != null)
+                    bw.close();
+                if (fw != null)
+                    fw.close();
+            }
+            catch (IOException ex) {
+                ex.printStackTrace();
+                mostraFrase(17);
+            }
+        }
+    }
+/*
+    public Imagem[] leArquivo(String fn) {
+        Imagem[] v;
+        return v;
+    }*/
+
+    public void opcao1() {
+        int num = 0;
+        char tipo = '0';
+
+        //Pede numero de imagens
+        while(num <= 0) {
+            mostraFrase(8);
+            num = validaEntrada(num);
+        }
+
+        //Pede tipo de vetor
+        while (!existeEm(opcao, tipo)) {
+            geraMenu(9,14);
+            mostraFrase(6);
+            tipo = validaEntrada(tipo);
+        }
+        if (tipo == '5') return;
+
+        //gera vetor de Imagem
+        v = g.geraVetorDeCoord(tipo, num);
+
+        //Pede nome de arquivo
+        mostraFrase(25);
+        mostraFrase(15);
+        scan.nextLine();
+        String fn = scan.nextLine(); 
+
+        escreveArquivo(fn, v);
+
+        //Volta pro menu inicial
+
+    } //Fim opcao1
+
+    public void opcao2() {
+
+        //Ler arquivo
+
+        //Pede nome de arquivo
+        mostraFrase(15);
+        scan.nextLine();
+        String fn = scan.nextLine(); 
+
+        //Confere se existe e le
+        //v = leArquivo(fn);
+
+        //Faz sort
+
+        //Mostra tempo
+
+        //Volta pro menu inicial
+
+    } //Fim opcao2
+
+    public void opcao3() {
+        int num = 0;
+        char tipo = '0';
+
+        //Pede numero de imagens
+        while(num <= 0) {
+            mostraFrase(8);
+            num = validaEntrada(num);
+        }
+
+        //Pede tipo de vetor
+        while (!existeEm(opcao, tipo)) {
+            geraMenu(9,14);
+            mostraFrase(6);
+            tipo = validaEntrada(tipo);
+        }
+        if (tipo == '5') return;
+
+        //gera vetor de Imagem
+        v = g.geraVetorDeCoord(tipo, num);
+        
+        //Faz sort
+
+        //Mostra tempo
+
+        //Volta pro menu inicial
+
+    } //Fim opcao3
+
+    public void opcao4() {
+        //Faz testes automaticos
+    }
+
+} //Fim classe Main
