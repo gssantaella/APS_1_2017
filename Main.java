@@ -41,32 +41,41 @@ class Main {
         "\nHeapsort",
         "\nMergesort",
         "\nQuicksort",
-        "\n--- Fim ---\n"
+        "\n--- Fim ---\n",
+        "\nSalvar arquivo\n",
     };
     private Scanner scan = new Scanner(System.in);
-
+    private Gerador g = new Gerador();
+    //private Ordenador o = new Ordenador();
+    private Imagem[] v;
+    
 
     // MAIN
     public static void main(String[] args) {
 
-        Main m = new Main();
+        Main m = new Main();     
 
         for (boolean sair = false; sair != true; ) {
             char c = '0';
 
             while (!m.existeEm(m.opcao, c)) {
-                m.geraMenu();
+                m.geraMenu(0,6);
                 c = m.validaEntrada(c);
             }
-            //System.out.println("> "+c);
 
             switch(c) {
                 case '1':
-                    m.mostraFrase(8);
+                    m.opcao1();
                     break;
                 case '2':
+                    m.opcao2();
+                    break;
                 case '3':
+                    m.opcao3();
+                    break;
                 case '4':
+                    m.opcao4();
+                    break;
                 case '5':
                     sair = true;
                     m.mostraFrase(24);
@@ -85,10 +94,11 @@ class Main {
     public void mostraFrase(int i) {
         System.out.print(frases[i]);
     }
-    public void geraMenu() {
-        for (int i = 0; i <= 6; i++)
+    public void geraMenu(int j, int k) {
+        for (int i = j; i <= k; i++)
             mostraFrase(i);
     }
+
 
     //TODO - unificar ou separar ambos valida entrada
     public char validaEntrada(char c) {
@@ -107,9 +117,10 @@ class Main {
         try {
             c = scan.nextInt();
         } catch (Exception e) {
-            System.out.println("Opcao invalida");
+            mostraFrase(7);
             scan.nextLine();
         }
+        //System.out.println("> "+c);
         return c;
     }
 
@@ -119,6 +130,131 @@ class Main {
                 return true;
         }
         return false;
+    }
+
+    public void escreveArquivo(String fn, Imagem[] v) {
+        BufferedWriter bw = null;
+        FileWriter fw = null;
+
+        try {
+            fw = new FileWriter(fn);
+            bw = new BufferedWriter(fw);
+
+            bw.write("COORDENADAS\n");
+
+            for (Imagem i : v) {
+                bw.write(i.getCoord() + "\n");
+            }
+
+            mostraFrase(16);
+        } 
+        catch (IOException e) {
+            e.printStackTrace();
+            mostraFrase(17);
+        } 
+        finally {
+            try {
+                if (bw != null)
+                    bw.close();
+                if (fw != null)
+                    fw.close();
+            }
+            catch (IOException ex) {
+                ex.printStackTrace();
+                mostraFrase(17);
+            }
+        }
+    }
+/*
+    public Imagem[] leArquivo(String fn) {
+        Imagem[] v;
+        return v;
+    }*/
+
+    public void opcao1() {
+        int num = 0;
+        char tipo = '0';
+
+        //Pede numero de imagens
+        while(num <= 0) {
+            mostraFrase(8);
+            num = validaEntrada(num);
+        }
+
+        //Pede tipo de vetor
+        while (!existeEm(opcao, tipo)) {
+            geraMenu(9,14);
+            mostraFrase(6);
+            tipo = validaEntrada(tipo);
+        }
+        if (tipo == '5') return;
+
+        //gera vetor de Imagem
+        v = g.geraVetorDeCoord(tipo, num);
+
+        //Pede nome de arquivo
+        mostraFrase(25);
+        mostraFrase(15);
+        scan.nextLine();
+        String fn = scan.nextLine(); 
+
+        escreveArquivo(fn, v);
+
+        //Volta pro menu inicial
+
+    } //Fim opcao1
+
+    public void opcao2() {
+
+        //Ler arquivo
+
+        //Pede nome de arquivo
+        mostraFrase(15);
+        scan.nextLine();
+        String fn = scan.nextLine(); 
+
+        //Confere se existe e le
+        //v = leArquivo(fn);
+
+        //Faz sort
+
+        //Mostra tempo
+
+        //Volta pro menu inicial
+
+    } //Fim opcao2
+
+    public void opcao3() {
+        int num = 0;
+        char tipo = '0';
+
+        //Pede numero de imagens
+        while(num <= 0) {
+            mostraFrase(8);
+            num = validaEntrada(num);
+        }
+
+        //Pede tipo de vetor
+        while (!existeEm(opcao, tipo)) {
+            geraMenu(9,14);
+            mostraFrase(6);
+            tipo = validaEntrada(tipo);
+        }
+        if (tipo == '5') return;
+
+        //gera vetor de Imagem
+        v = g.geraVetorDeCoord(tipo, num);
+        
+        //Faz sort
+
+        //Mostra tempo
+
+        //Volta pro menu inicial
+
+    } //Fim opcao3
+
+    public void opcao4() {
+        //Faz testes automaticos
     }
 
 } //Fim classe Main

@@ -50,7 +50,7 @@ public class Gerador {
     // Construtores
     Gerador() {}
 
-    Gerador(int tamanho, int tipo) {
+    /*Gerador(int tamanho, int tipo) {
         this.tamanho = tamanho;
         this.tipo = tipo;
     }
@@ -67,7 +67,7 @@ public class Gerador {
     }
     public int getTipo() {
         return this.tipo;
-    }
+    }*/
 
 /*
     public static void main(String[] args) {
@@ -189,7 +189,7 @@ public class Gerador {
         for (int i = 0; i < n/5; i++) { //20% dos valores estao embaralhados
             int j = r.nextInt(n);
             int k = r.nextInt(n);
-            System.out.println(j +" "+ k);
+            //System.out.println(j +" "+ k);
             aux.setCoord(v[j].getCoord());
             v[j].setCoord(v[k].getCoord());
             v[k].setCoord(aux.getCoord());
