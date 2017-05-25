@@ -266,14 +266,17 @@ class Main {
         // e faz ordenacao
         montaVetor(fn);
         tempo = o.heapsort(v);
+        System.out.println("\nHeapsort:  " + tempo/1000000000.0 + "s");
         escreveArquivo("a.out", v);
 
         montaVetor(fn);
         tempo = o.mergesort(v);
+        System.out.println("\nMergesort: " + tempo/1000000000.0 + "s");
         escreveArquivo("b.out", v);
 
         montaVetor(fn);
         tempo = o.quicksort(v);
+        System.out.println("\nQuicksort: " + tempo/1000000000.0 + "s");
         escreveArquivo("c.out", v);
 
         //Volta pro menu inicial
@@ -309,6 +312,7 @@ class Main {
             aux[i] = new Imagem(v[i].getCoord());
         }
         tempo = o.heapsort(aux);
+        System.out.println("\nHeapsort:  " + tempo/1000000000.0 + "s");
         escreveArquivo("a2.out", aux);
 
         aux = new Imagem[v.length];
@@ -316,6 +320,7 @@ class Main {
             aux[i] = new Imagem(v[i].getCoord());
         }
         tempo = o.mergesort(aux);
+        System.out.println("\nMergesort: " + tempo/1000000000.0 + "s");
         escreveArquivo("b2.out", aux);
 
         aux = new Imagem[v.length];
@@ -323,6 +328,7 @@ class Main {
             aux[i] = new Imagem(v[i].getCoord());
         }
         tempo = o.quicksort(aux);
+        System.out.println("\nQuicksort: " + tempo/1000000000.0 + "s");
         escreveArquivo("c2.out", aux);
 
         //Volta pro menu inicial
@@ -330,7 +336,163 @@ class Main {
     } //Fim opcao3
 
     public void opcao4() {
-        //Faz testes automaticos
-    }
+
+        int n = 100;
+
+        System.out.println("\n\nSerao criados " 
+            + n + " vetores de cada tamanho e de cada tipo "
+            + "para encontrar o tempo medio de cada algoritmo");
+
+        //Testes com Heapsort
+        testeHeapsort(n);
+
+        //Testes com Mergesort
+        testeMergesort(n);
+
+        //Testes com Quicksort
+        testeQuicksort(n);
+    } //Fim opcao4
+
+    public void testeHeapsort(int n) {
+
+        int tam = 100000;
+        
+        System.out.println("\n-- HEAPSORT --");
+        System.out.println("\nVetores aleatorios");
+        System.out.println("| Tamanho | Tempo medio   |");
+        long tempo = 0;
+        for (int k = 100; k <= tam; k *= 10) {
+            for (int i = 0; i < n; i++) {
+                v = g.geraVetorDeCoord('1', 100);
+                tempo += o.heapsort(v);
+            }
+            System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
+        }
+        System.out.println("\nVetores invertidos");
+        System.out.println("| Tamanho | Tempo medio   |");
+        tempo = 0;
+        for (int k = 100; k <= tam; k *= 10) {
+            for (int i = 0; i < n; i++) {
+                v = g.geraVetorDeCoord('2', 100);
+                tempo += o.heapsort(v);
+            }
+            System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
+        }
+        System.out.println("\nVetores semiordenados");
+        System.out.println("| Tamanho | Tempo medio   |");
+        tempo = 0;
+        for (int k = 100; k <= tam; k *= 10) {
+            for (int i = 0; i < n; i++) {
+                v = g.geraVetorDeCoord('3', 100);
+                tempo += o.heapsort(v);
+            }
+            System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
+        }
+        System.out.println("\nVetores repetidos");
+        System.out.println("| Tamanho | Tempo medio   |");
+        tempo = 0;
+        for (int k = 100; k <= tam; k *= 10) {
+            for (int i = 0; i < n; i++) {
+                v = g.geraVetorDeCoord('4', 100);
+                tempo += o.heapsort(v);
+            }
+            System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
+        }
+
+    } // testeHeapsort
+
+    public void testeMergesort(int n) {
+
+        int tam = 100000;
+        
+        System.out.println("\n-- MERGESORT --");
+        System.out.println("\nVetores aleatorios");
+        System.out.println("| Tamanho | Tempo medio   |");
+        long tempo = 0;
+        for (int k = 100; k <= tam; k *= 10) {
+            for (int i = 0; i < n; i++) {
+                v = g.geraVetorDeCoord('1', 100);
+                tempo += o.mergesort(v);
+            }
+            System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
+        }
+        System.out.println("\nVetores invertidos");
+        System.out.println("| Tamanho | Tempo medio   |");
+        tempo = 0;
+        for (int k = 100; k <= tam; k *= 10) {
+            for (int i = 0; i < n; i++) {
+                v = g.geraVetorDeCoord('2', 100);
+                tempo += o.mergesort(v);
+            }
+            System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
+        }
+        System.out.println("\nVetores semiordenados");
+        System.out.println("| Tamanho | Tempo medio   |");
+        tempo = 0;
+        for (int k = 100; k <= tam; k *= 10) {
+            for (int i = 0; i < n; i++) {
+                v = g.geraVetorDeCoord('3', 100);
+                tempo += o.mergesort(v);
+            }
+            System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
+        }
+        System.out.println("\nVetores repetidos");
+        System.out.println("| Tamanho | Tempo medio   |");
+        tempo = 0;
+        for (int k = 100; k <= tam; k *= 10) {
+            for (int i = 0; i < n; i++) {
+                v = g.geraVetorDeCoord('4', 100);
+                tempo += o.mergesort(v);
+            }
+            System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
+        }
+    } // fim testeMergesort
+
+    public void testeQuicksort(int n) {
+
+        int tam = 100000;
+        
+        System.out.println("\n-- QUICKSORT --");
+        System.out.println("\nVetores aleatorios");
+        System.out.println("| Tamanho | Tempo medio   |");
+        long tempo = 0;
+        for (int k = 100; k <= tam; k *= 10) {
+            for (int i = 0; i < n; i++) {
+                v = g.geraVetorDeCoord('1', 100);
+                tempo += o.quicksort(v);
+            }
+            System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
+        }
+        System.out.println("\nVetores invertidos");
+        System.out.println("| Tamanho | Tempo medio   |");
+        tempo = 0;
+        for (int k = 100; k <= tam; k *= 10) {
+            for (int i = 0; i < n; i++) {
+                v = g.geraVetorDeCoord('2', 100);
+                tempo += o.quicksort(v);
+            }
+            System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
+        }
+        System.out.println("\nVetores semiordenados");
+        System.out.println("| Tamanho | Tempo medio   |");
+        tempo = 0;
+        for (int k = 100; k <= tam; k *= 10) {
+            for (int i = 0; i < n; i++) {
+                v = g.geraVetorDeCoord('3', 100);
+                tempo += o.quicksort(v);
+            }
+            System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
+        }
+        System.out.println("\nVetores repetidos");
+        System.out.println("| Tamanho | Tempo medio   |");
+        tempo = 0;
+        for (int k = 100; k <= tam; k *= 10) {
+            for (int i = 0; i < n; i++) {
+                v = g.geraVetorDeCoord('4', 100);
+                tempo += o.quicksort(v);
+            }
+            System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
+        }
+    } //fim testeQuicksort
 
 } //Fim classe Main
