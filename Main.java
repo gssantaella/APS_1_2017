@@ -50,7 +50,7 @@ class Main {
     };
     private Scanner scan = new Scanner(System.in);
     private Gerador g = new Gerador();
-    //private Ordenador o = new Ordenador();
+    private Ordenador o = new Ordenador();
     private Imagem[] v;
     
 
@@ -255,20 +255,26 @@ class Main {
     } //Fim opcao1
 
     public void opcao2() {
-
-        //Ler arquivo
+        long tempo;
 
         //Pede nome de arquivo
         mostraFrase(15);
         scan.nextLine();
         String fn = scan.nextLine(); 
 
-        //Confere se existe, le e monta o vetor
+        //Confere se arquivo existe, le, monta o vetor
+        // e faz ordenacao
         montaVetor(fn);
+        tempo = o.heapsort(v);
+        escreveArquivo("a.out", v);
 
-        //Faz sort
+        montaVetor(fn);
+        tempo = o.mergesort(v);
+        escreveArquivo("b.out", v);
 
-        //Mostra tempo
+        montaVetor(fn);
+        tempo = o.quicksort(v);
+        escreveArquivo("c.out", v);
 
         //Volta pro menu inicial
 
@@ -277,6 +283,7 @@ class Main {
     public void opcao3() {
         int num = 0;
         char tipo = '0';
+        long tempo;
 
         //Pede numero de imagens
         while(num <= 0) {
@@ -294,10 +301,29 @@ class Main {
 
         //gera vetor de Imagem
         v = g.geraVetorDeCoord(tipo, num);
+        Imagem[] aux;
         
-        //Faz sort
+        //Copia vetor e faz sort
+        aux = new Imagem[v.length];
+        for (int i = 0; i < v.length; i++) {
+            aux[i] = new Imagem(v[i].getCoord());
+        }
+        tempo = o.heapsort(aux);
+        escreveArquivo("a2.out", aux);
 
-        //Mostra tempo
+        aux = new Imagem[v.length];
+        for (int i = 0; i < v.length; i++) {
+            aux[i] = new Imagem(v[i].getCoord());
+        }
+        tempo = o.mergesort(aux);
+        escreveArquivo("b2.out", aux);
+
+        aux = new Imagem[v.length];
+        for (int i = 0; i < v.length; i++) {
+            aux[i] = new Imagem(v[i].getCoord());
+        }
+        tempo = o.quicksort(aux);
+        escreveArquivo("c2.out", aux);
 
         //Volta pro menu inicial
 
