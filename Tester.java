@@ -1,0 +1,10 @@
+/*
+ *
+ * Testes automaticos
+ *
+ */
+
+class Tester {
+
+    
+}

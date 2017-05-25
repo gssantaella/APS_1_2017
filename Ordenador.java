@@ -25,7 +25,7 @@ class Ordenador {
         long endTime = System.nanoTime();
 
         long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
-        System.out.println("\nHeapsort:  " + duration/1000000000.0 + "s");
+        //System.out.println("\nHeapsort:  " + duration/1000000000.0 + "s");
 
         return duration;
     }
@@ -84,7 +84,7 @@ class Ordenador {
         long endTime = System.nanoTime();
 
         long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
-        System.out.println("\nMergesort: " + duration/1000000000.0 + "s");
+        //System.out.println("\nMergesort: " + duration/1000000000.0 + "s");
         
         return duration;
     }
@@ -178,7 +178,7 @@ class Ordenador {
         long endTime = System.nanoTime();
 
         long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
-        System.out.println("\nQuicksort: " + duration/1000000000.0 + "s");
+        //System.out.println("\nQuicksort: " + duration/1000000000.0 + "s");
 
         return duration;
     }
