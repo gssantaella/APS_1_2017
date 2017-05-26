@@ -1,12 +1,9 @@
 /*
+ * Ordenador.java
  *
  * Classe que contem os algoritmos de ordenação
  * Decebe vetor de imagem desordenado e o ordena de forma crescente
  *
-
-FAZER CADA UM DOS SORTS RETORNANDO O TEMPO
-TESTE VAI SER MAIS FACIL ASSIM
-
  */
 
 class Ordenador {
@@ -24,8 +21,7 @@ class Ordenador {
         heap(v);
         long endTime = System.nanoTime();
 
-        long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
-        //System.out.println("\nHeapsort:  " + duration/1000000000.0 + "s");
+        long duration = (endTime - startTime);
 
         return duration;
     }
@@ -83,26 +79,22 @@ class Ordenador {
         ordena(v, 0, v.length-1);
         long endTime = System.nanoTime();
 
-        long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
-        //System.out.println("\nMergesort: " + duration/1000000000.0 + "s");
+        long duration = (endTime - startTime);
         
         return duration;
     }
 
-    // Merges two subarrays of v[].
-    // First subarray is v[l..m]
-    // Second subarray is v[m+1..r]
     private void merge(Imagem[] v, int e, int m, int d)
     {
-        // Find sizes of two subarrays to be merged
+
+        // Encontra tamanho dos subvetores a serem fundidos
         int n1 = m - e + 1;
         int n2 = d - m;
  
-        /* Create temp arrays */
+        // Cria arrays temporarios
         Imagem E[] = new Imagem [n1];
         Imagem D[] = new Imagem [n2];
  
-        /*Copy data to temp arrays*/
         for (int i = 0; i < n1; i++) {
             E[i] = v[e + i];
         }
@@ -111,12 +103,10 @@ class Ordenador {
         }
  
  
-        /* Merge the temp arrays */
+        //Fundir arrays temporarios
  
-        // Initial indexes of first and second subarrays
         int i = 0, j = 0;
  
-        // Initial index of merged subarry array
         int k = e;
         while (i < n1 && j < n2)
         {
@@ -133,7 +123,7 @@ class Ordenador {
             k++;
         }
  
-        /* Copy remaining elements of E[] if any */
+        // Copiar elementos de E[] que estiverem sobrando, se necessario
         while (i < n1)
         {
             v[k] = E[i];
@@ -141,7 +131,7 @@ class Ordenador {
             k++;
         }
  
-        /* Copy remaining elements of D[] if any */
+        // Copiar elementos de D[] que estiverem sobrando, se necessario
         while (j < n2)
         {
             v[k] = D[j];
@@ -177,21 +167,18 @@ class Ordenador {
         quickSort(v, 0, v.length-1);
         long endTime = System.nanoTime();
 
-        long duration = (endTime - startTime);  //divide by 1000000 to get milliseconds.
-        //System.out.println("\nQuicksort: " + duration/1000000000.0 + "s");
+        long duration = (endTime - startTime);
 
         return duration;
     }
 
-    private void swap(Imagem[] v,int i,int j)
+    private void troca(Imagem[] v,int i,int j)
     {
         Imagem t = v[i];
         v[i] = v[j];
         v[j] = t;
     }
  
-    /* This function is same in both iterative and
-       recursive*/
     private int partition (Imagem[] v, int l, int h)
     {
         Imagem x = v[h];
@@ -202,48 +189,44 @@ class Ordenador {
             if (v[j].compareTo(x) <= 0)
             {
                 i++;
-                // swap v[i] and v[j]
-                swap(v,i,j);
+                // troca v[i] e v[j]
+                troca(v,i,j);
             }
         }
-        // swap v[i+1] and v[h]
-        swap(v,i+1,h);
+        // troca v[i+1] e v[h]
+        troca(v,i+1,h);
         return (i + 1);
     }
  
-    // Sorts v[l..h] using iterative QuickSort
+    // Quicksort iterativo, o recursivo tem um overhead 
+    // grande demais quando o vetor e' invertido
     private void quickSort(Imagem[] v, int l, int h)
     {
-        // create auxiliary stack
+        // cria pilha auxiliar
         int stack[] = new int[h-l+1];
  
-        // initialize top of stack
+        // inicializa o topo da pilha
         int top = -1;
  
-        // push initial values in the stack
         stack[++top] = l;
         stack[++top] = h;
  
-        // keep popping elements until stack is not empty
+        // retira elementos ate' pilha estar vazia
         while (top >= 0)
         {
-            // pop h and l
+            // pop h e l
             h = stack[top--];
             l = stack[top--];
  
-            // set pivot element at it's proper position
+            // coloca pivo na posicao
             int p = partition(v, l, h);
  
-            // If there are elements on left side of pivot,
-            // then push left side to stack
             if ( p-1 > l )
             {
                 stack[ ++top ] = l;
                 stack[ ++top ] = p - 1;
             }
- 
-            // If there are elements on right side of pivot,
-            // then push right side to stack
+
             if ( p+1 < h )
             {
                 stack[ ++top ] = p + 1;
