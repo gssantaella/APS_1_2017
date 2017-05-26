@@ -6,20 +6,6 @@
  * Esse retangulo corresponde a regiao aproximada da floresta
  * amazonica em coordenadas de latitude e longitude.
  *
- * Compilar:
- * $ javac Gerador.java
- *
- * Rodar:
- * $ java Gerador
- * $ java Gerador [numero de coordenadas] [tipo]
- *
- * Exemplo de uso
- * $ java Gerador 5000 2
- * 
- * Usa o numero 15 como semente para o gerador de numeros aleatorios
- * e gera 5000 coordenadas. TODO
- * 
- * Um arquivo .csv sera gerado com as coordenadas
  *
  */
 
@@ -50,88 +36,11 @@ public class Gerador {
     // Construtores
     Gerador() {}
 
-    /*Gerador(int tamanho, int tipo) {
-        this.tamanho = tamanho;
-        this.tipo = tipo;
-    }
-
-    // Getters & Setters
-    public void setTamanho(int tamanho) {
-        this.tamanho = tamanho;
-    }
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
-    }
-    public int getTamanho() {
-        return this.tamanho;
-    }
-    public int getTipo() {
-        return this.tipo;
-    }*/
-
-/*
-    public static void main(String[] args) {
-
-        Random rand;
-        int n = 100;
-        if (args.length == 1) {
-            // defender de entradas invalidas TODO
-            rand = new Random(Integer.parseInt(args[0]));
-        }
-        else if (args.length == 2) {
-            rand = new Random(Integer.parseInt(args[0]));
-            n = Integer.parseInt(args[1]);
-        }
-        else {
-            rand = new Random();
-        }
-
-        BufferedWriter bw = null;
-        FileWriter fw = null;
-
-        try {
-            fw = new FileWriter("coordenadas.csv");
-            bw = new BufferedWriter(fw);
-
-            bw.write("LATITUDE, LONGITUDE,\n");
-
-            for (int i = 0; i < n; i++) {
-                bw.write(geraLat(rand) +
-                 ", " + geraLong(rand) + ",\n");
-            }
-
-            System.out.println("Arquivo escrito");
-        } 
-        catch (IOException e) {
-            e.printStackTrace();
-        } 
-        finally {
-            try {
-                if (bw != null)
-                    bw.close();
-                if (fw != null)
-                    fw.close();
-            }
-            catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-
-
-    }*/ // fim main
-
-    //TEST ONLY - Essa clase não tera main
-    public static void main(String[] args) {
-        Gerador g = new Gerador();
-
-        Imagem[] v = g.geraVetorSemiOrdenado(19);
-        for (Imagem i : v) {
-            System.out.println(i);
-        }
-
-    }
-
     // Metodos
+    
+    /*
+     * Cria uma string concatenando duas coordenadas
+     */
     private String geraCoord(Random rand) {
         DecimalFormat decimalFormat;
         String la, lo;
@@ -166,6 +75,7 @@ public class Gerador {
         }
         return v;
     }
+
     private Imagem[] geraVetorInvertido(int n) {
         Imagem[] v = new Imagem[n];
         Random r = new Random();
@@ -176,6 +86,7 @@ public class Gerador {
         Arrays.sort(v, Collections.reverseOrder());
         return v;
     }
+
     private Imagem[] geraVetorSemiOrdenado(int n) {
         Imagem[] v = new Imagem[n];
         Random r = new Random();
@@ -186,10 +97,11 @@ public class Gerador {
         Arrays.sort(v);
 
         Imagem aux = new Imagem();
-        for (int i = 0; i < n/5; i++) { //20% dos valores estao embaralhados
+        //20% dos valores serao embaralhados
+        for (int i = 0; i < n/5; i++) { 
             int j = r.nextInt(n);
             int k = r.nextInt(n);
-            //System.out.println(j +" "+ k);
+
             aux.setCoord(v[j].getCoord());
             v[j].setCoord(v[k].getCoord());
             v[k].setCoord(aux.getCoord());
@@ -197,6 +109,7 @@ public class Gerador {
 
         return v;
     }
+
     private Imagem[] geraVetorRepetido(int n) {
         Imagem[] v = new Imagem[n];
         Random r = new Random();

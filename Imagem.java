@@ -1,4 +1,5 @@
 /*
+ * Imagem.java
  *
  * Uma imagem é definida por uma latitude e longitude.
  * Para facilitar a ordenacao, uma string esta sendo usada,
@@ -14,18 +15,11 @@ class Imagem implements Comparable<Imagem> {
     // Atributos
     private String coordenada;
 
-    private int totalDeImagens = 0;
-
-
     // Construtores
-    Imagem() {
-        totalDeImagens++;
-    }
+    Imagem() { }
 
     Imagem(String coordenada) {
         this.coordenada = coordenada;
-
-        totalDeImagens++;
     }
 
 

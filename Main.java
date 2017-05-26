@@ -1,4 +1,5 @@
 /*
+ * Main.java
  *
  * Classe de interacao com o usuario
  *
@@ -98,33 +99,33 @@ class Main {
     public void mostraFrase(int i) {
         System.out.print(frases[i]);
     }
+
     public void geraMenu(int j, int k) {
         for (int i = j; i <= k; i++)
             mostraFrase(i);
     }
 
-
-    //TODO - unificar ou separar ambos valida entrada
     public char validaEntrada(char c) {
-        //char c = '0';
+
         try {
             c = scan.next("[1-5sSnNqQ]").charAt(0);
         } catch (Exception e) {
             mostraFrase(7);
             scan.nextLine();
         }
-        //System.out.println("> "+c);
+
         return c;
     }
+
     public int validaEntrada(int c) {
-        //int c = 0;
+
         try {
             c = scan.nextInt();
         } catch (Exception e) {
             mostraFrase(7);
             scan.nextLine();
         }
-        //System.out.println("> "+c);
+
         return c;
     }
 
@@ -143,8 +144,6 @@ class Main {
         try {
             fw = new FileWriter(fn);
             bw = new BufferedWriter(fw);
-
-            //bw.write("COORDENADAS\n");
 
             for (Imagem i : v) {
                 bw.write(i.getCoord() + "\n");
@@ -215,9 +214,7 @@ class Main {
         v = new Imagem[s.size()];
             int i = 0;
             for (String aux : s) {
-                //System.out.println(aux);
                 v[i++] = new Imagem(aux);
-                //System.out.println(v[i-1]);
             }
     }
 
@@ -355,7 +352,7 @@ class Main {
 
     public void testeHeapsort(int n) {
 
-        int tam = 100000;
+        int tam = 10000;
         
         System.out.println("\n-- HEAPSORT --");
         System.out.println("\nVetores aleatorios");
@@ -363,7 +360,7 @@ class Main {
         long tempo = 0;
         for (int k = 100; k <= tam; k *= 10) {
             for (int i = 0; i < n; i++) {
-                v = g.geraVetorDeCoord('1', 100);
+                v = g.geraVetorDeCoord('1', k);
                 tempo += o.heapsort(v);
             }
             System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
@@ -373,7 +370,7 @@ class Main {
         tempo = 0;
         for (int k = 100; k <= tam; k *= 10) {
             for (int i = 0; i < n; i++) {
-                v = g.geraVetorDeCoord('2', 100);
+                v = g.geraVetorDeCoord('2', k);
                 tempo += o.heapsort(v);
             }
             System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
@@ -383,7 +380,7 @@ class Main {
         tempo = 0;
         for (int k = 100; k <= tam; k *= 10) {
             for (int i = 0; i < n; i++) {
-                v = g.geraVetorDeCoord('3', 100);
+                v = g.geraVetorDeCoord('3', k);
                 tempo += o.heapsort(v);
             }
             System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
@@ -393,7 +390,7 @@ class Main {
         tempo = 0;
         for (int k = 100; k <= tam; k *= 10) {
             for (int i = 0; i < n; i++) {
-                v = g.geraVetorDeCoord('4', 100);
+                v = g.geraVetorDeCoord('4', k);
                 tempo += o.heapsort(v);
             }
             System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
@@ -403,7 +400,7 @@ class Main {
 
     public void testeMergesort(int n) {
 
-        int tam = 100000;
+        int tam = 10000;
         
         System.out.println("\n-- MERGESORT --");
         System.out.println("\nVetores aleatorios");
@@ -411,7 +408,7 @@ class Main {
         long tempo = 0;
         for (int k = 100; k <= tam; k *= 10) {
             for (int i = 0; i < n; i++) {
-                v = g.geraVetorDeCoord('1', 100);
+                v = g.geraVetorDeCoord('1', k);
                 tempo += o.mergesort(v);
             }
             System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
@@ -421,7 +418,7 @@ class Main {
         tempo = 0;
         for (int k = 100; k <= tam; k *= 10) {
             for (int i = 0; i < n; i++) {
-                v = g.geraVetorDeCoord('2', 100);
+                v = g.geraVetorDeCoord('2', k);
                 tempo += o.mergesort(v);
             }
             System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
@@ -431,7 +428,7 @@ class Main {
         tempo = 0;
         for (int k = 100; k <= tam; k *= 10) {
             for (int i = 0; i < n; i++) {
-                v = g.geraVetorDeCoord('3', 100);
+                v = g.geraVetorDeCoord('3', k);
                 tempo += o.mergesort(v);
             }
             System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
@@ -441,7 +438,7 @@ class Main {
         tempo = 0;
         for (int k = 100; k <= tam; k *= 10) {
             for (int i = 0; i < n; i++) {
-                v = g.geraVetorDeCoord('4', 100);
+                v = g.geraVetorDeCoord('4', k);
                 tempo += o.mergesort(v);
             }
             System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
@@ -450,7 +447,7 @@ class Main {
 
     public void testeQuicksort(int n) {
 
-        int tam = 100000;
+        int tam = 10000;
         
         System.out.println("\n-- QUICKSORT --");
         System.out.println("\nVetores aleatorios");
@@ -458,7 +455,7 @@ class Main {
         long tempo = 0;
         for (int k = 100; k <= tam; k *= 10) {
             for (int i = 0; i < n; i++) {
-                v = g.geraVetorDeCoord('1', 100);
+                v = g.geraVetorDeCoord('1', k);
                 tempo += o.quicksort(v);
             }
             System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
@@ -466,9 +463,9 @@ class Main {
         System.out.println("\nVetores invertidos");
         System.out.println("| Tamanho | Tempo medio   |");
         tempo = 0;
-        for (int k = 100; k <= tam; k *= 10) {
+        for (int k = 100; k <= tam; k *= 10) { //Quicksort e' n^2
             for (int i = 0; i < n; i++) {
-                v = g.geraVetorDeCoord('2', 100);
+                v = g.geraVetorDeCoord('2', k);
                 tempo += o.quicksort(v);
             }
             System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
@@ -478,7 +475,7 @@ class Main {
         tempo = 0;
         for (int k = 100; k <= tam; k *= 10) {
             for (int i = 0; i < n; i++) {
-                v = g.geraVetorDeCoord('3', 100);
+                v = g.geraVetorDeCoord('3', k);
                 tempo += o.quicksort(v);
             }
             System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
@@ -488,7 +485,7 @@ class Main {
         tempo = 0;
         for (int k = 100; k <= tam; k *= 10) {
             for (int i = 0; i < n; i++) {
-                v = g.geraVetorDeCoord('4', 100);
+                v = g.geraVetorDeCoord('4', k);
                 tempo += o.quicksort(v);
             }
             System.out.printf("| %7d | %,.9f s |\n", k, (tempo/n)/1000000000.0);
