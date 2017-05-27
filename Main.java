@@ -264,17 +264,17 @@ class Main {
         montaVetor(fn);
         tempo = o.heapsort(v);
         System.out.println("\nHeapsort:  " + tempo/1000000000.0 + "s");
-        escreveArquivo("a.out", v);
+        escreveArquivo("heap.out", v);
 
         montaVetor(fn);
         tempo = o.mergesort(v);
         System.out.println("\nMergesort: " + tempo/1000000000.0 + "s");
-        escreveArquivo("b.out", v);
+        escreveArquivo("merge.out", v);
 
         montaVetor(fn);
         tempo = o.quicksort(v);
         System.out.println("\nQuicksort: " + tempo/1000000000.0 + "s");
-        escreveArquivo("c.out", v);
+        escreveArquivo("quick.out", v);
 
         //Volta pro menu inicial
 
@@ -310,7 +310,7 @@ class Main {
         }
         tempo = o.heapsort(aux);
         System.out.println("\nHeapsort:  " + tempo/1000000000.0 + "s");
-        escreveArquivo("a2.out", aux);
+        escreveArquivo("heap2.out", aux);
 
         aux = new Imagem[v.length];
         for (int i = 0; i < v.length; i++) {
@@ -318,7 +318,7 @@ class Main {
         }
         tempo = o.mergesort(aux);
         System.out.println("\nMergesort: " + tempo/1000000000.0 + "s");
-        escreveArquivo("b2.out", aux);
+        escreveArquivo("merge2.out", aux);
 
         aux = new Imagem[v.length];
         for (int i = 0; i < v.length; i++) {
@@ -326,7 +326,7 @@ class Main {
         }
         tempo = o.quicksort(aux);
         System.out.println("\nQuicksort: " + tempo/1000000000.0 + "s");
-        escreveArquivo("c2.out", aux);
+        escreveArquivo("quick2.out", aux);
 
         //Volta pro menu inicial
 
@@ -352,7 +352,7 @@ class Main {
 
     public void testeHeapsort(int n) {
 
-        int tam = 10000;
+        int tam = 100000;
         
         System.out.println("\n-- HEAPSORT --");
         System.out.println("\nVetores aleatorios");
@@ -400,7 +400,7 @@ class Main {
 
     public void testeMergesort(int n) {
 
-        int tam = 10000;
+        int tam = 100000;
         
         System.out.println("\n-- MERGESORT --");
         System.out.println("\nVetores aleatorios");
@@ -447,7 +447,7 @@ class Main {
 
     public void testeQuicksort(int n) {
 
-        int tam = 10000;
+        int tam = 100000;
         
         System.out.println("\n-- QUICKSORT --");
         System.out.println("\nVetores aleatorios");
@@ -463,7 +463,7 @@ class Main {
         System.out.println("\nVetores invertidos");
         System.out.println("| Tamanho | Tempo medio   |");
         tempo = 0;
-        for (int k = 100; k <= tam; k *= 10) { //Quicksort e' n^2
+        for (int k = 100; k <= tam/10; k *= 10) { //Quicksort e' n^2
             for (int i = 0; i < n; i++) {
                 v = g.geraVetorDeCoord('2', k);
                 tempo += o.quicksort(v);
@@ -473,7 +473,7 @@ class Main {
         System.out.println("\nVetores semiordenados");
         System.out.println("| Tamanho | Tempo medio   |");
         tempo = 0;
-        for (int k = 100; k <= tam; k *= 10) {
+        for (int k = 100; k <= tam/10; k *= 10) {
             for (int i = 0; i < n; i++) {
                 v = g.geraVetorDeCoord('3', k);
                 tempo += o.quicksort(v);
