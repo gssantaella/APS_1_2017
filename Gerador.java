@@ -98,7 +98,7 @@ public class Gerador {
 
         Imagem aux = new Imagem();
         //20% dos valores serao embaralhados
-        for (int i = 0; i < n/5; i++) { 
+        for (int i = 0; i < n/10; i++) { 
             int j = r.nextInt(n);
             int k = r.nextInt(n);
 
